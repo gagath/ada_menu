@@ -29,6 +29,8 @@ package Menu is
         Items : T_Items.Vector;
     end record;
 
+    procedure Add_Item(M : in out T_Menu; Item : in T_Item);
+
     -- Show a menu's title and all of its items
     procedure Show(M : in T_Menu);
 
