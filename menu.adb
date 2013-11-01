@@ -12,7 +12,7 @@ package body Menu is
         First : T_Items.Extended_Index := T_Items.First_Index(M.Items);
         Last  : T_Items.Extended_Index := T_Items.Last_Index(M.Items);
     begin
-        Put_Line("> " & SU.To_String(M.Title));
+        Put_Line(SU.To_String(M.Title));
         New_Line;
 
         for I in First..Last loop
@@ -24,8 +24,35 @@ package body Menu is
     end;
 
     procedure Query(M : in T_Menu) is
+        Response : Character;
+
+        Item  : T_Item;
+        First : T_Items.Extended_Index := T_Items.First_Index(M.Items);
+        Last  : T_Items.Extended_Index := T_Items.Last_Index(M.Items);
+
+        Found : Boolean := False;
     begin
-        Show(M);
+        while not Found loop
+            Show(M);
+            Put("> ");
+            Get(Response);
+
+            for I in First..Last loop
+                Item := T_Items.Element(M.Items, I);
+
+                -- If we got existing symbol and the func does exists, call it
+                if Item.Symbol = Response then
+                    if Item.Func /= null then                
+                        Item.Func.all;
+                    end if;
+                    Found := True;
+                end if;
+            end loop;
+            if not Found then
+                Put_Line("Bad answer !")
+                Put_Line("Please answer an existing choice.");
+            end if;
+        end loop;
     end;
 
 end Menu;
