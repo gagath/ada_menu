@@ -46,10 +46,11 @@ package body Menu is
                         Item.Func.all;
                     end if;
                     Found := True;
+                    exit;
                 end if;
             end loop;
             if not Found then
-                Put_Line("Bad answer !")
+                Put_Line("Bad answer !");
                 Put_Line("Please answer an existing choice.");
             end if;
         end loop;
