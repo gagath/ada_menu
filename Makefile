@@ -1,9 +1,9 @@
-MAIN=hello
-FILES=hello.adb menu.adb
+MAIN=example
+FILES=example.adb menu.adb
 
 all: $(FILES)
 	gnatmake $(MAIN)
 
 clean:
-	gnatclean hello
+	gnatclean example
 	gnatclean menu
